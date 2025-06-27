@@ -6,7 +6,7 @@ import { supabase } from './supabase';
 /** --- 1. Define the shape of your fragrance rows ----------------------- */
 interface Fragrance {
   id: number;
-  name: string;
+  perfume: string;
   brand: string;
   top_notes: string[] | null;
   // add more fields later as needed
@@ -20,12 +20,16 @@ export default function FragranceSwiper() {
   useEffect(() => {
     const fetchFragrances = async () => {
       const { data, error } = await supabase
-        .from('fragrances')
+        .from('Fragrances')
         .select('*')
         .limit(20);
 
-      if (error) console.error(error);
-      else setFragrances(data as Fragrance[]);
+      if (error) {
+        console.error('Error fetching fragrances:', error);
+      } else {
+        console.log('Fetched data:', data);
+        setFragrances(data || []);
+      }
 
       setLoading(false);
     };
@@ -35,8 +39,10 @@ export default function FragranceSwiper() {
 
   const handleSwipeRight = (index: number) => {
     const liked = fragrances[index];
-    console.log('Liked:', liked.name);
-    // saving logic will go here next
+    if (liked) {
+      console.log('Liked:', liked.perfume);
+      // saving logic will go here next
+    }
   };
 
   if (loading) {
@@ -48,19 +54,32 @@ export default function FragranceSwiper() {
     );
   }
 
+  if (!loading && fragrances.length === 0) {
+    return (
+      <View style={styles.loader}>
+        <Text>No fragrances found.</Text>
+      </View>
+    );
+  }
+
   return (
     <Swiper
       /* tell Swiper what a card looks like */
       cards={fragrances}
-      renderCard={(card: Fragrance) => (
-        <View style={styles.card}>
-          <Text style={styles.title}>{card.name}</Text>
-          <Text style={styles.brand}>{card.brand}</Text>
-          <Text style={styles.notes}>
-            Top notes: {card.top_notes?.join(', ')}
-          </Text>
-        </View>
-      )}
+      renderCard={(card: Fragrance) => {
+        if (!card) {
+          return <View style={styles.card} />;
+        }
+        return (
+          <View style={styles.card}>
+            <Text style={styles.title}>{card.perfume}</Text>
+            <Text style={styles.brand}>{card.brand}</Text>
+            <Text style={styles.notes}>
+              Top notes: {card.top_notes?.join(', ')}
+            </Text>
+          </View>
+        );
+      }}
       onSwipedRight={handleSwipeRight}
       backgroundColor="transparent"
       cardIndex={0}

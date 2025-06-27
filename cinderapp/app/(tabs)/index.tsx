@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
-import FragranceSwiper from '../../FragranceSwiper';
+import FragranceSwiper from '../../fragranceswiper';
 import { Stack } from 'expo-router';
 
 export default function Home() {
