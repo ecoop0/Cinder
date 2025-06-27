@@ -1,0 +1,70 @@
+🧠 Define Your App's Core Data and Flow
+Before you touch code, design, or tools, define what the app is—how it behaves and what data it runs on.
+
+✅ Step 1: Draft the Core Flow
+Write this in plain English or sketch on paper:
+
+User opens the app → sees a cologne card with info (name, brand, notes, rating).
+
+User swipes right → fragrance is saved to their “liked” list.
+
+User swipes left → fragrance is skipped.
+
+User views their liked list.
+
+(Optional) They can tap into a fragrance to see more details.
+
+✅ Step 2: Define Your Data Schema
+Make a basic table of what a fragrance needs in your app:
+
+Field	Example
+id	1
+name	"Dior Sauvage"
+brand	"Dior"
+notes	["bergamot", "ambroxan", "pepper"]
+image_url	URL to a bottle image
+rating	4.6
+type	"EDP"
+longevity	"moderate"
+sillage	"strong"
+
+Also sketch out user data:
+
+id
+
+email
+
+liked_fragrances: array of IDs
+
+(Optional: custom tags, notes, rating, etc.)
+
+✅ Step 3: Gather Sample Data
+You’ll need ~50–100 fragrance entries for an MVP. Start by:
+
+Creating a CSV or JSON file with fragrance data.
+
+Include image URLs (can be placeholders from Unsplash or Fragrantica* if for demo only).
+
+Don’t worry about copyright yet if you're just testing.
+
+You can scrape or manually collect data for now, but this will become a serious consideration if you plan to publish.
+
+✅ Step 4: Choose Your Tools
+Once you have the flow and data:
+
+Frontend: Set up a fresh Expo React Native app (npx create-expo-app)
+
+Backend: Sign up for Supabase and model the fragrance and user tables
+
+Design: Sketch 2–3 key screens in Figma (or pen and paper)
+
+💡 In short:
+Before anything else, get clarity on:
+
+What the user sees and does (the flow),
+
+What data powers the app (the schema),
+
+And collect a little sample data.
+
+Let me know when you’ve got that drafted, and I’ll walk you through setting up Supabase or the swipe UI next.
